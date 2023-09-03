@@ -6,6 +6,8 @@ import com.cg.boot.entity.Student;
 import com.cg.boot.exception.StudentNotFoundException;
 import com.cg.boot.service.StudentServiceImpl;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.Mockito.*;
@@ -30,6 +32,11 @@ public class StudentServiceImplUnitTests {
     @Spy
     StudentServiceImpl service;
 
+//    @BeforeEach
+//    public void setUp() {
+//    	service = new StudentServiceImpl();
+//    	StudentServiceImpl spy = spy(service);
+//    }
     /**
      * scenario: Student found by id
      * input id:34, studentDao#findById stubbed returns optional of expectedStudent
@@ -43,7 +50,7 @@ public class StudentServiceImplUnitTests {
         when(studentDao.findById(id)).thenReturn(optional);
         Student result=service.findById(id);
         assertEquals(expectedStudent,result);
-        verify(studentDao).findById(id);
+        verify(studentDao).findById(id); // whitebox testing, internal execution is as expected
     }
 
     /**
@@ -69,6 +76,7 @@ public class StudentServiceImplUnitTests {
         Student student=mock(Student.class);
         Student saved=mock(Student.class);
         when(studentDao.save(student)).thenReturn(saved);
+        doNothing().when(service).validate(student); // prevent validate
         Student result=service.addStudent(student);
         assertEquals(saved,result);
         verify(studentDao).save(student);

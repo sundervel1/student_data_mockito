@@ -30,16 +30,22 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Student addStudent(Student stud) {
 		logger.info("Adding :" +stud);
+		validate(stud); // for mock test
 		Student studentSaved = studDao.save(stud);
 		System.out.println(studDao.getClass().getName());
 		System.out.println("saved: " + studentSaved);
 		return studentSaved;
+	}
+	
+	public void validate(Student stud) {
+		System.out.println("validate:"+stud);
 	}
 
 	@Override
 	public Student findById(Integer id) {
 		logger.info("find by id :" + id);
 		Optional<Student> opt = studDao.findById(id);
+		// studDao.findById(id); // for whitebox testing
 		if(!opt.isPresent()) {
 			logger.error("Student not found for id: "+id);
 			throw new StudentNotFoundException("Student not found for id: "+id);
