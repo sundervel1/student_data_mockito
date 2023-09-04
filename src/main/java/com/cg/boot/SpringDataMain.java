@@ -15,7 +15,7 @@ public class SpringDataMain {
 		System.out.println("Spring data app running....");
 	}
 	@Bean
-	public CorsFilter corsFilter(*) {
+	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowCredentials(true);
