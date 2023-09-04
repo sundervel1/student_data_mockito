@@ -9,13 +9,13 @@ import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
 public class SpringDataMain {
-
+	int aaaaaaaaaaa;
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataMain.class, args);
 		System.out.println("Spring data app running....");
 	}
 	@Bean
-	public CorsFilter corsFilter() {
+	public CorsFilter corsFilter(*) {
 		UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration configuration = new CorsConfiguration();
 		configuration.setAllowCredentials(true);
